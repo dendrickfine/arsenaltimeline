@@ -45,6 +45,9 @@ export default async function DashboardPage() {
                     <Link href="/dashboard/iklan" className="text-blue-500 hover:underline">
                         Kelola Iklan
                     </Link>
+                    <Link href="/dashboard/sponsor" className="text-blue-500 hover:underline">
+                        Kelola Sponsor
+                    </Link>
                 </nav>
             </div>
         </div>

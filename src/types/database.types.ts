@@ -165,7 +165,6 @@ export type Database = {
           deskripsi: string | null
           id_sponsor: number
           logo_sponsor: string | null
-          nama_sponsor: string
           posisi: number | null
           url_sponsor: string | null
         }
@@ -174,7 +173,6 @@ export type Database = {
           deskripsi?: string | null
           id_sponsor?: number
           logo_sponsor?: string | null
-          nama_sponsor: string
           posisi?: number | null
           url_sponsor?: string | null
         }
@@ -183,7 +181,6 @@ export type Database = {
           deskripsi?: string | null
           id_sponsor?: number
           logo_sponsor?: string | null
-          nama_sponsor?: string
           posisi?: number | null
           url_sponsor?: string | null
         }
