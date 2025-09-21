@@ -16,9 +16,13 @@ export default function SignOutButton() {
   return (
     <button
       onClick={handleSignOut}
-      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors"
+      style={{ backgroundColor: '#EF0107' }}
+      className="text-white font-bold py-2 px-4 rounded transition-colors"
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#EF0107')}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#DB0007')}
     >
       Sign Out
     </button>
+
   )
 }

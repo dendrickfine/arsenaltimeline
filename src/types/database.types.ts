@@ -50,6 +50,7 @@ export type Database = {
           penulis: string | null
           status: string
           updated_at: string | null
+          views: number | null
         }
         Insert: {
           created_at?: string | null
@@ -61,6 +62,7 @@ export type Database = {
           penulis?: string | null
           status: string
           updated_at?: string | null
+          views?: number | null
         }
         Update: {
           created_at?: string | null
@@ -72,6 +74,7 @@ export type Database = {
           penulis?: string | null
           status?: string
           updated_at?: string | null
+          views?: number | null
         }
         Relationships: [
           {
@@ -216,21 +219,18 @@ export type Database = {
       video: {
         Row: {
           created_at: string | null
-          deskripsi: string | null
           id_video: number
           judul_video: string
           url_video: string
         }
         Insert: {
           created_at?: string | null
-          deskripsi?: string | null
           id_video?: number
           judul_video: string
           url_video: string
         }
         Update: {
           created_at?: string | null
-          deskripsi?: string | null
           id_video?: number
           judul_video?: string
           url_video?: string

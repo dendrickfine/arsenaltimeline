@@ -16,7 +16,7 @@ export async function createBanner(prevState: FormState, formData: FormData): Pr
   const deskripsi = formData.get('deskripsi') as string;
 
   if (!gambarFile || gambarFile.size === 0) {
-    return { message: 'Gambar banner wajib diisi.', error: true };
+    return { message: 'Pick image!', error: true };
   }
 
   // 1. Upload Gambar
@@ -26,7 +26,7 @@ export async function createBanner(prevState: FormState, formData: FormData): Pr
     .upload(fileName, gambarFile);
 
   if (uploadError) {
-    return { message: `Gagal mengupload gambar: ${uploadError.message}`, error: true };
+    return { message: `Error: ${uploadError.message}`, error: true };
   }
     
   // 2. Ambil URL Publik
@@ -44,11 +44,11 @@ export async function createBanner(prevState: FormState, formData: FormData): Pr
   });
 
   if (insertError) {
-    return { message: `Gagal membuat banner: ${insertError.message}`, error: true };
+    return { message: `Error: ${insertError.message}`, error: true };
   }
   
   revalidatePath('/dashboard/banner');
-  return { message: 'Banner berhasil dibuat.', error: false };
+  return { message: 'Banner added.', error: false };
 }
 
 // ACTION: Menghapus Banner
@@ -64,11 +64,11 @@ export async function deleteBanner(id_banner: number, gambar_banner_url: string)
         .eq('id_banner', id_banner);
     
     if (error) {
-        return { message: `Gagal menghapus banner: ${error.message}`, error: true };
+        return { message: `Error: ${error.message}`, error: true };
     }
 
     revalidatePath('/dashboard/banner');
-    return { message: 'Banner berhasil dihapus.', error: false };
+    return { message: 'Successfully deleted.', error: false };
 }
 
 // ACTION: Update Banner (Versi diperbaiki)
@@ -90,7 +90,7 @@ export async function updateBanner(prevState: FormState, formData: FormData): Pr
       .upload(fileName, gambarFile);
 
     if (uploadError) {
-      return { message: `Gagal mengupload gambar baru: ${uploadError.message}`, error: true };
+      return { message: `Error: ${uploadError.message}`, error: true };
     }
     
     // Ambil URL baru
@@ -121,9 +121,9 @@ export async function updateBanner(prevState: FormState, formData: FormData): Pr
     .eq('id_banner', Number(id_banner));
 
   if (updateError) {
-    return { message: `Gagal mengupdate banner: ${updateError.message}`, error: true };
+    return { message: `Error: ${updateError.message}`, error: true };
   }
 
   revalidatePath('/dashboard/banner');
-  return { message: 'Banner berhasil diperbarui.', error: false };
+  return { message: 'Banner updated.', error: false };
 }

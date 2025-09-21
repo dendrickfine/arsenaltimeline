@@ -14,7 +14,7 @@ function SubmitButton() {
       disabled={pending}
       className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
     >
-      {pending ? 'Menyimpan...' : 'Simpan User'}
+      {pending ? 'Saving...' : 'Save'}
     </button>
   )
 }
@@ -66,7 +66,7 @@ export default function CreateUserForm() {
             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
           <label htmlFor="show_password" className="ml-2 block text-sm text-gray-900">
-            Tampilkan password
+            Show password
           </label>
         </div>
       </div>

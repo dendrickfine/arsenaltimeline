@@ -15,7 +15,7 @@ export default function CategoryActions({ category }: { category: Category }) {
 
   async function handleDelete() {
     const confirmDelete = confirm(
-      `Apakah kamu yakin ingin menghapus kategori "${category.nama_kategori}"?`
+      `Are you sure to delete "${category.nama_kategori}"?`
     );
     if (!confirmDelete) return;
 
@@ -40,7 +40,7 @@ export default function CategoryActions({ category }: { category: Category }) {
         disabled={isPending}
         className="text-red-600 hover:text-red-900 disabled:opacity-50"
       >
-        {isPending ? 'Menghapus...' : 'Hapus'}
+        {isPending ? 'Deleting...' : 'Delete'}
       </button>
 
       {isEditing && (

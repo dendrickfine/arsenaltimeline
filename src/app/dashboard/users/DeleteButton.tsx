@@ -7,7 +7,7 @@ export default function DeleteButton({ userId }: { userId: string }) {
   let [isPending, startTransition] = useTransition()
 
   const handleDelete = () => {
-    if (window.confirm('Apakah Anda yakin ingin menghapus user ini?')) {
+    if (window.confirm('Are you sure to kick this user?')) {
       startTransition(async () => {
         const result = await deleteUser(userId)
         if (result?.message) {
@@ -23,7 +23,7 @@ export default function DeleteButton({ userId }: { userId: string }) {
       disabled={isPending}
       className="text-red-600 hover:text-red-900 disabled:text-gray-400"
     >
-      {isPending ? 'Menghapus...' : 'Hapus'}
+      {isPending ? 'Deleting...' : 'Delete'}
     </button>
   )
 }

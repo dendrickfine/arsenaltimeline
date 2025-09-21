@@ -30,7 +30,7 @@ function SubmitButton({ isEditing }: { isEditing: boolean }) {
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded disabled:bg-gray-400">
-      {pending ? 'Menyimpan...' : (isEditing ? 'Update Artikel' : 'Simpan Artikel')}
+      {pending ? 'Saving...' : (isEditing ? 'Update' : 'Save')}
     </button>
   );
 }
@@ -71,7 +71,7 @@ export default function ArticleForm({ action, article }: { action: (prevState: F
 
   const editor = useEditor({
     extensions: [StarterKit],
-    content: article?.isi_artikel || '<p>Tulis ceritamu di sini...</p>',
+    content: article?.isi_artikel || '<p></p>',
     immediatelyRender: false,
     editorProps: {
       attributes: {
@@ -99,12 +99,12 @@ export default function ArticleForm({ action, article }: { action: (prevState: F
       )}
 
       <div>
-        <label htmlFor="judul_artikel" className="block text-sm font-medium text-gray-700">Judul Artikel</label>
+        <label htmlFor="judul_artikel" className="block text-sm font-medium text-gray-700">Title</label>
         <input type="text" name="judul_artikel" id="judul_artikel" required defaultValue={article?.judul_artikel} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
       </div>
 
       <div>
-        <label htmlFor="id_kategori" className="block text-sm font-medium text-gray-700">Kategori</label>
+        <label htmlFor="id_kategori" className="block text-sm font-medium text-gray-700">Category</label>
         <select
           name="id_kategori"
           id="id_kategori"
@@ -112,7 +112,7 @@ export default function ArticleForm({ action, article }: { action: (prevState: F
           defaultValue={article?.id_kategori ? String(article.id_kategori) : ''}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md"
         >
-          <option value="">Pilih Kategori</option>
+          <option value="">Select Category</option>
           {categories.map(cat => (
             <option key={cat.id_kategori} value={String(cat.id_kategori)}>
               {cat.nama_kategori}
@@ -122,19 +122,19 @@ export default function ArticleForm({ action, article }: { action: (prevState: F
       </div>
 
       <div>
-        <label htmlFor="gambar_artikel" className="block text-sm font-medium text-gray-700">Gambar Utama</label>
+        <label htmlFor="gambar_artikel" className="block text-sm font-medium text-gray-700">Main Image</label>
         {article?.gambar_artikel && (
           <div className="mt-2">
-            <p className="text-sm text-gray-500 mb-2">Gambar saat ini:</p>
+            <p className="text-sm text-gray-500 mb-2">Current Image :</p>
             <Image src={article.gambar_artikel} alt={article.judul_artikel} width={200} height={100} className="rounded-md object-cover" />
           </div>
         )}
         <input type="file" name="gambar_artikel" id="gambar_artikel" accept="image/*" className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
-        <p className="text-xs text-gray-500 mt-1">Kosongkan jika tidak ingin mengubah gambar.</p>
+        <p className="text-xs text-gray-500 mt-1">Please ignore if you don't want to change the image.</p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Isi Artikel</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Body</label>
         <input name="isi_artikel" type="hidden" defaultValue={article?.isi_artikel || ''} />
         <div className="border border-gray-300 rounded-md">
           <Toolbar editor={editor} />

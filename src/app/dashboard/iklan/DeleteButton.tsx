@@ -17,7 +17,7 @@ export default function DeleteButton({ iklanId, imageUrl }: { iklanId: number; i
 
   return (
     <button onClick={handleDelete} disabled={isPending} className="text-red-600 hover:text-red-900 ...">
-      {isPending ? 'Menghapus...' : 'Hapus'}
+      {isPending ? 'Deleting...' : 'Delete'}
     </button>
   );
 }

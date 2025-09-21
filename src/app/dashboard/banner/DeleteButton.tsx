@@ -7,7 +7,7 @@ export default function DeleteButton({ bannerId, imageUrl }: { bannerId: number;
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {
-    if (window.confirm('Apakah Anda yakin ingin menghapus banner ini?')) {
+    if (window.confirm('Are you sure to delete?')) {
       startTransition(async () => {
         const result = await deleteBanner(bannerId, imageUrl);
         alert(result.message);
@@ -17,7 +17,7 @@ export default function DeleteButton({ bannerId, imageUrl }: { bannerId: number;
 
   return (
     <button onClick={handleDelete} disabled={isPending} className="text-red-600 hover:text-red-900 ...">
-      {isPending ? 'Menghapus...' : 'Hapus'}
+      {isPending ? 'Deleting...' : 'Delete'}
     </button>
   );
 }

@@ -24,14 +24,14 @@ export default function UserActions({ user, currentUserId }: { user: User; curre
         onClick={() => setPasswordModalOpen(true)} // <-- Tombol baru
         className="text-orange-600 hover:text-orange-900"
       >
-        Ganti Password
+        Change Password
       </button>
 
       <button 
         onClick={() => setEditModalOpen(true)} 
         className="text-blue-600 hover:text-blue-900"
       >
-        Edit Profil
+        Edit Profile
       </button>
 
       {user.id_user !== currentUserId && <DeleteButton userId={user.id_user} />}

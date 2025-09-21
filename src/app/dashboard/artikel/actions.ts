@@ -15,7 +15,7 @@ export async function createArticle(prevState: FormState, formData: FormData): P
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    return { message: 'Akses ditolak: Anda harus login.', error: true };
+    return { message: 'Access denied', error: true };
   }
 
   const judul_artikel = formData.get('judul_artikel') as string;
@@ -26,10 +26,10 @@ export async function createArticle(prevState: FormState, formData: FormData): P
 
   // -- VALIDASI BARU --
   if (!id_kategori) {
-    return { message: 'Kategori wajib dipilih.', error: true };
+    return { message: 'Pick the category!', error: true };
   }
   if (!judul_artikel) {
-    return { message: 'Judul artikel tidak boleh kosong.', error: true };
+    return { message: 'Fill the title!', error: true };
   }
   // --------------------
 
@@ -40,7 +40,7 @@ export async function createArticle(prevState: FormState, formData: FormData): P
     const fileName = `${user.id}/${Date.now()}-${gambarFile.name}`;
     const { data: uploadData, error: uploadError } = await supabaseAdmin.storage.from('gambar-artikel').upload(fileName, gambarFile);
     if (uploadError) {
-      return { message: `Gagal mengupload gambar: ${uploadError.message}`, error: true };
+      return { message: `Error: ${uploadError.message}`, error: true };
     }
     const { data: publicUrlData } = supabaseAdmin.storage.from('gambar-artikel').getPublicUrl(uploadData.path);
     gambar_artikel_url = publicUrlData.publicUrl;
@@ -56,12 +56,12 @@ export async function createArticle(prevState: FormState, formData: FormData): P
   });
 
   if (insertError) {
-    return { message: `Gagal membuat artikel: ${insertError.message}`, error: true };
+    return { message: `Error: ${insertError.message}`, error: true };
   }
 
   revalidatePath('/dashboard/artikel');
   // Kita akan pindahkan redirect ke sisi klien setelah pesan sukses
-  return { message: 'Artikel berhasil dibuat!', error: false };
+  return { message: 'Your article is ready!', error: false };
 }
 
 
@@ -80,11 +80,11 @@ export async function deleteArticle(id_artikel: number, gambar_artikel_url: stri
     .eq('id_artikel', id_artikel);
 
   if (error) {
-    return { message: `Gagal menghapus artikel: ${error.message}`, error: true };
+    return { message: `Error: ${error.message}`, error: true };
   }
 
   revalidatePath('/dashboard/artikel');
-  return { message: 'Artikel berhasil dihapus.', error: false };
+  return { message: 'Sucessfully deleted.', error: false };
 }
 
 // ACTION: Mengupdate Artikel yang Ada
@@ -100,10 +100,10 @@ export async function updateArticle(prevState: FormState, formData: FormData): P
   
   // Validasi
   if (!id_kategori) {
-    return { message: 'Kategori wajib dipilih.', error: true };
+    return { message: 'Pick the category!', error: true };
   }
   if (!judul_artikel) {
-    return { message: 'Judul artikel tidak boleh kosong.', error: true };
+    return { message: 'Fill the title!', error: true };
   }
   
   let gambar_artikel_url = old_image_url; // Defaultnya gunakan gambar lama
@@ -117,7 +117,7 @@ export async function updateArticle(prevState: FormState, formData: FormData): P
       .upload(fileName, gambarFile);
 
     if (uploadError) {
-      return { message: `Gagal upload gambar baru: ${uploadError.message}`, error: true };
+      return { message: `Error: ${uploadError.message}`, error: true };
     }
 
     // b. Ambil URL publik gambar baru
@@ -147,10 +147,10 @@ export async function updateArticle(prevState: FormState, formData: FormData): P
     .eq('id_artikel', parseInt(id_artikel));
 
   if (updateError) {
-    return { message: `Gagal mengupdate artikel: ${updateError.message}`, error: true };
+    return { message: `Error: ${updateError.message}`, error: true };
   }
 
   revalidatePath('/dashboard/artikel');
   // Di akhir, ganti redirect('/dashboard/artikel') dengan:
-  return { message: 'Artikel berhasil diupdate!', error: false };
+  return { message: 'Sucessfully updated.', error: false };
 }

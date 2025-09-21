@@ -31,10 +31,10 @@ export async function createSponsor(prevState: FormState, formData: FormData): P
     deskripsi,
   });
 
-  if (insertError) return { message: `Gagal membuat sponsor: ${insertError.message}`, error: true };
+  if (insertError) return { message: `Error: ${insertError.message}`, error: true };
   
   revalidatePath('/dashboard/sponsor');
-  return { message: 'Sponsor berhasil dibuat.', error: false };
+  return { message: 'Sponsor added.', error: false };
 }
 
 // ACTION: Menghapus Sponsor
@@ -50,11 +50,11 @@ export async function deleteSponsor(id_sponsor: number, logo_sponsor_url: string
         .eq('id_sponsor', id_sponsor);
     
     if (error) {
-        return { message: `Gagal menghapus sponsor: ${error.message}`, error: true };
+        return { message: `Error: ${error.message}`, error: true };
     }
 
     revalidatePath('/dashboard/sponsor');
-    return { message: 'Sponsor berhasil dihapus.', error: false };
+    return { message: 'Sponsor deleted.', error: false };
 }
 
 // ACTION: Update Sponsor
@@ -75,7 +75,7 @@ export async function updateSponsor(prevState: FormState, formData: FormData): P
       .upload(fileName, logoFile);
 
     if (uploadError) {
-      return { message: `Gagal mengupload logo baru: ${uploadError.message}`, error: true };
+      return { message: `Error: ${uploadError.message}`, error: true };
     }
     
     const { data: publicUrlData } = supabaseAdmin.storage.from('logo-sponsor').getPublicUrl(uploadData.path);
@@ -100,9 +100,9 @@ export async function updateSponsor(prevState: FormState, formData: FormData): P
     .eq('id_sponsor', Number(id_sponsor));
 
   if (updateError) {
-    return { message: `Gagal mengupdate sponsor: ${updateError.message}`, error: true };
+    return { message: `Error: ${updateError.message}`, error: true };
   }
 
   revalidatePath('/dashboard/sponsor');
-  return { message: 'Sponsor berhasil diperbarui.', error: false };
+  return { message: 'Sponsor updated.', error: false };
 }

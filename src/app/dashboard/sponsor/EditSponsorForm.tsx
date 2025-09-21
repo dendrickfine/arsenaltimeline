@@ -13,7 +13,7 @@ function SubmitButton() {
       disabled={pending}
       className="w-full rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-70"
     >
-      {pending ? 'Menyimpan...' : 'Update Sponsor'}
+      {pending ? 'Saving...' : 'Save'}
     </button>
   );
 }
@@ -41,7 +41,7 @@ export default function EditSponsorForm({ sponsor }: { sponsor: any }) {
       {/* Input Logo Sponsor */}
       <div className="flex flex-col">
         <label htmlFor="logo_sponsor" className="font-medium text-gray-700">
-          Logo Sponsor (Opsional untuk update)
+          Sponsor Logo
         </label>
         <input
           type="file"
@@ -51,14 +51,14 @@ export default function EditSponsorForm({ sponsor }: { sponsor: any }) {
           className="mt-1 w-full rounded-md border px-3 py-2 text-sm"
         />
         <p className="text-xs text-gray-500">
-          Kosongkan jika tidak ingin mengganti logo
+          Please ignore if you don't want to change the logo.
         </p>
       </div>
 
       {/* Input URL Sponsor */}
       <div className="flex flex-col">
         <label htmlFor="url_sponsor" className="font-medium text-gray-700">
-          URL Sponsor
+          URL
         </label>
         <input
           type="url"
@@ -72,7 +72,7 @@ export default function EditSponsorForm({ sponsor }: { sponsor: any }) {
       {/* Input Posisi */}
       <div className="flex flex-col">
         <label htmlFor="posisi" className="font-medium text-gray-700">
-          Posisi
+          Position
         </label>
         <input
           type="text"
@@ -86,7 +86,7 @@ export default function EditSponsorForm({ sponsor }: { sponsor: any }) {
       {/* Input Deskripsi */}
       <div className="flex flex-col">
         <label htmlFor="deskripsi" className="font-medium text-gray-700">
-          Deskripsi Singkat
+          Description
         </label>
         <textarea
           name="deskripsi"

@@ -11,6 +11,11 @@ export default async function KelolaIklanPage() {
   } = await supabase.auth.getSession();
   if (!session) redirect('/login');
 
+  const { data: profile } = await supabase.from('users').select('role').eq('id_user', session.user.id).single();
+  if (profile?.role !== 'admin') {
+    return <div className="text-red-500 font-bold text-center mt-10">Access Denied. This page is for admins only.</div>;
+  }
+
   const { data: iklans, error } = await supabase
     .from('iklan')
     .select('*')
@@ -18,11 +23,11 @@ export default async function KelolaIklanPage() {
 
   return (
     <div className="p-4 md:p-8">
-      <h1 className="text-3xl font-bold mb-8">Kelola Iklan</h1>
+      <h1 className="text-3xl font-bold mb-8">Manage Ads</h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Daftar Iklan */}
         <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-bold mb-4">Daftar Iklan</h2>
+          <h2 className="text-xl font-bold mb-4">Ad List</h2>
           <div className="space-y-4">
             {iklans?.map((iklan) => (
               <div
@@ -40,10 +45,10 @@ export default async function KelolaIklanPage() {
                   />
                   <div className="flex flex-col">
                     <p className="font-semibold text-gray-800">
-                      Posisi: {iklan.posisi || 'Tidak ada posisi'}
+                      Position: {iklan.posisi || 'Tidak ada posisi'}
                     </p>
                     <p className="text-sm text-gray-600">
-                      Deskripsi: {iklan.deskripsi || 'Tidak ada deskripsi'}
+                      Descripiton: {iklan.deskripsi || 'Tidak ada deskripsi'}
                     </p>
                     <a
                       href={iklan.url_tujuan || '#'}

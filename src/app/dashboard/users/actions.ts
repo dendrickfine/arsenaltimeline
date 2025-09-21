@@ -88,11 +88,11 @@ export async function updateUser(prevState: FormState, formData: FormData): Prom
   );
 
   if (authError) {
-    console.warn(`Berhasil update profil, tapi gagal update metadata/email auth: ${authError.message}`);
+    console.warn(`Error: ${authError.message}`);
   }
 
   revalidatePath('/dashboard/users');
-  return { message: 'User berhasil diupdate.', error: false };
+  return { message: 'User updated.', error: false };
 }
 
 // ACTION: Mengganti password user
@@ -103,10 +103,10 @@ export async function changeUserPassword(prevState: FormState, formData: FormDat
 
   // 1. Validasi dasar
   if (new_password.length < 6) {
-    return { message: 'Password baru harus minimal 6 karakter.', error: true };
+    return { message: 'Password must minimum 6 karakter.', error: true };
   }
   if (new_password !== confirm_password) {
-    return { message: 'Password baru dan konfirmasi tidak cocok.', error: true };
+    return { message: 'Password not match.', error: true };
   }
 
   // 2. Update password di Supabase Auth
@@ -116,10 +116,10 @@ export async function changeUserPassword(prevState: FormState, formData: FormDat
   );
 
   if (error) {
-    return { message: `Gagal mengganti password: ${error.message}`, error: true };
+    return { message: `Error: ${error.message}`, error: true };
   }
 
   // revalidatePath tidak diperlukan karena tidak ada data di halaman yang berubah
-  return { message: 'Password user berhasil diganti.', error: false };
+  return { message: 'Password updated.', error: false };
 }
 

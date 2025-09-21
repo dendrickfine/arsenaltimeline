@@ -35,12 +35,12 @@ export default function EditUserModal({ user, onClose }: { user: User; onClose: 
 
     return (
         <dialog open onCancel={onClose} className="p-6 bg-white rounded-lg shadow-xl w-full max-w-md backdrop:bg-black backdrop:bg-opacity-50">
-            <h2 className="text-2xl font-bold mb-4">Edit User: {user.nama_user}</h2>
+            <h2 className="text-2xl font-bold mb-4">Edit: {user.nama_user}</h2>
             <form action={formAction} className="space-y-4">
                 <input type="hidden" name="id_user" value={user.id_user} />
 
                 <div>
-                    <label htmlFor="nama_user" className="block text-sm font-medium text-gray-700">Nama User</label>
+                    <label htmlFor="nama_user" className="block text-sm font-medium text-gray-700">Name</label>
                     {/* className dilengkapi */}
                     <input type="text" id="nama_user" name="nama_user" required defaultValue={user.nama_user} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
                 </div>
@@ -51,7 +51,7 @@ export default function EditUserModal({ user, onClose }: { user: User; onClose: 
                 </div>
 
                 <div>
-                    <label htmlFor="instagram" className="block text-sm font-medium text-gray-700">Instagram (Opsional)</label>
+                    <label htmlFor="instagram" className="block text-sm font-medium text-gray-700">Instagram (Optional)</label>
                     {/* className dilengkapi */}
                     <input type="text" id="instagram" name="instagram" placeholder="@username" defaultValue={user.instagram || ''} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
                 </div>
@@ -64,7 +64,7 @@ export default function EditUserModal({ user, onClose }: { user: User; onClose: 
                     </select>
                 </div>
                 <div className="flex gap-4 pt-4">
-                    <button type="button" onClick={onClose} className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">Batal</button>
+                    <button type="button" onClick={onClose} className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">Cancel</button>
                     <SubmitButton />
                 </div>
                 {state?.message && (

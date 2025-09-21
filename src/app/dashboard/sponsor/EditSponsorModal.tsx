@@ -10,7 +10,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
-      {pending ? 'Menyimpan...' : 'Update Sponsor'}
+      {pending ? 'Saving...' : 'Save'}
     </button>
   );
 }
@@ -36,29 +36,29 @@ export default function EditSponsorModal({ sponsor, onClose }: { sponsor: any; o
             <input type="hidden" name="old_image_url" value={sponsor.logo_sponsor || ''} />
             
             <div>
-                <label className="block text-sm font-medium text-gray-700">Logo Sponsor</label>
+                <label className="block text-sm font-medium text-gray-700">Sponsor logo</label>
                 {sponsor.logo_sponsor && <Image src={sponsor.logo_sponsor} alt="Current Sponsor" width={150} height={75} className="mt-2 rounded-md object-cover"/>}
                 <input type="file" name="logo_sponsor" accept="image/*" className="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
-                <p className="text-xs text-gray-500">Kosongkan jika tidak ingin mengganti logo.</p>
+                <p className="text-xs text-gray-500">Please ignore if you don't want to change the logo.</p>
             </div>
             
             <div>
-                <label className="block text-sm font-medium text-gray-700">URL Sponsor</label>
+                <label className="block text-sm font-medium text-gray-700">URL</label>
                 <input type="url" name="url_sponsor" defaultValue={sponsor.url_sponsor || ''} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"/>
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700">Posisi</label>
+                <label className="block text-sm font-medium text-gray-700">Position</label>
                 <input type="text" name="posisi" defaultValue={sponsor.posisi || ''} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"/>
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700">Deskripsi Singkat</label>
+                <label className="block text-sm font-medium text-gray-700">Description</label>
                 <textarea name="deskripsi" rows={3} defaultValue={sponsor.deskripsi || ''} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
             </div>
 
             <div className="flex gap-4 pt-2">
-                <button type="button" onClick={onClose} className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">Batal</button>
+                <button type="button" onClick={onClose} className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">Cancel</button>
                 <SubmitButton />
             </div>
             {state?.message && state.error && <p className="text-red-500 text-sm mt-2 text-center">{state.message}</p>}

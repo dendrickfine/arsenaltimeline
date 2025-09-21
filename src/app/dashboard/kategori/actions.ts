@@ -14,7 +14,7 @@ export async function createCategory(prevState: FormState, formData: FormData): 
   const nama_kategori = formData.get('nama_kategori') as string;
 
   if (!nama_kategori) {
-    return { message: 'Nama kategori tidak boleh kosong.', error: true };
+    return { message: 'Fill the name!', error: true };
   }
 
   const { error } = await supabaseAdmin
@@ -24,13 +24,13 @@ export async function createCategory(prevState: FormState, formData: FormData): 
   if (error) {
     // Error code '23505' adalah untuk duplicate value (nilai unik)
     if (error.code === '23505') {
-      return { message: 'Nama kategori sudah ada.', error: true };
+      return { message: 'Name exists.', error: true };
     }
-    return { message: `Gagal membuat kategori: ${error.message}`, error: true };
+    return { message: `Error: ${error.message}`, error: true };
   }
 
   revalidatePath('/dashboard/kategori');
-  return { message: 'Kategori berhasil dibuat.', error: false };
+  return { message: 'Category added!', error: false };
 }
 
 // ACTION: Mengupdate kategori
@@ -39,7 +39,7 @@ export async function updateCategory(prevState: FormState, formData: FormData): 
   const nama_kategori = formData.get('nama_kategori') as string;
 
   if (!nama_kategori) {
-    return { message: 'Nama kategori tidak boleh kosong.', error: true };
+    return { message: 'Fill the name!', error: true };
   }
 
   const { error } = await supabaseAdmin
@@ -49,13 +49,13 @@ export async function updateCategory(prevState: FormState, formData: FormData): 
 
   if (error) {
      if (error.code === '23505') {
-      return { message: 'Nama kategori sudah ada.', error: true };
+      return { message: 'Name exists', error: true };
     }
-    return { message: `Gagal mengupdate kategori: ${error.message}`, error: true };
+    return { message: `Error: ${error.message}`, error: true };
   }
 
   revalidatePath('/dashboard/kategori');
-  return { message: 'Kategori berhasil diupdate.', error: false };
+  return { message: 'Category added!', error: false };
 }
 
 
@@ -67,9 +67,9 @@ export async function deleteCategory(id_kategori: number) {
     .eq('id_kategori', id_kategori);
 
   if (error) {
-    return { message: `Gagal menghapus kategori: ${error.message}`, error: true };
+    return { message: `Error: ${error.message}`, error: true };
   }
 
   revalidatePath('/dashboard/kategori');
-  return { message: 'Kategori berhasil dihapus.', error: false };
+  return { message: 'Successfully deleted!', error: false };
 }

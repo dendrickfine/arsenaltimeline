@@ -15,7 +15,7 @@ export async function createIklan(prevState: FormState, formData: FormData): Pro
   const deskripsi = formData.get('deskripsi') as string;
 
   if (!gambarFile || gambarFile.size === 0) {
-    return { message: 'Gambar iklan wajib diisi.', error: true };
+    return { message: 'Pick image!', error: true };
   }
 
   // 1. Upload Gambar
@@ -25,7 +25,7 @@ export async function createIklan(prevState: FormState, formData: FormData): Pro
     .upload(fileName, gambarFile);
 
   if (uploadError) {
-    return { message: `Gagal mengupload gambar: ${uploadError.message}`, error: true };
+    return { message: `Error: ${uploadError.message}`, error: true };
   }
     
   // 2. Ambil URL Publik
@@ -43,11 +43,11 @@ export async function createIklan(prevState: FormState, formData: FormData): Pro
   });
 
   if (insertError) {
-    return { message: `Gagal membuat iklan: ${insertError.message}`, error: true };
+    return { message: `Error: ${insertError.message}`, error: true };
   }
   
   revalidatePath('/dashboard/iklan');
-  return { message: 'Iklan berhasil dibuat.', error: false };
+  return { message: 'Ad added.', error: false };
 }
 
 export async function deleteIklan(id_iklan: number, gambar_iklan_url: string) {
@@ -62,11 +62,11 @@ export async function deleteIklan(id_iklan: number, gambar_iklan_url: string) {
         .eq('id_iklan', id_iklan);
     
     if (error) {
-        return { message: `Gagal menghapus iklan: ${error.message}`, error: true };
+        return { message: `Error: ${error.message}`, error: true };
     }
 
     revalidatePath('/dashboard/iklan');
-    return { message: 'Iklan berhasil dihapus.', error: false };
+    return { message: 'Add deleted.', error: false };
 }
 
 export async function updateIklan(prevState: FormState, formData: FormData): Promise<FormState> {
@@ -87,7 +87,7 @@ export async function updateIklan(prevState: FormState, formData: FormData): Pro
       .upload(fileName, gambarFile);
 
     if (uploadError) {
-      return { message: `Gagal mengupload gambar baru: ${uploadError.message}`, error: true };
+      return { message: `Error: ${uploadError.message}`, error: true };
     }
     
     // Ambil URL baru
@@ -118,9 +118,9 @@ export async function updateIklan(prevState: FormState, formData: FormData): Pro
     .eq('id_iklan', Number(id_iklan));
 
   if (updateError) {
-    return { message: `Gagal mengupdate iklan: ${updateError.message}`, error: true };
+    return { message: `Error: ${updateError.message}`, error: true };
   }
 
   revalidatePath('/dashboard/iklan');
-  return { message: 'Iklan berhasil diperbarui.', error: false };
+  return { message: 'Ad updated.', error: false };
 }

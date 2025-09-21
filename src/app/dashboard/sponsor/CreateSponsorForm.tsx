@@ -11,9 +11,9 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-70"
+      className="w-full rounded-md bg-blue-500 px-4 py-2 text-white font-bold hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-70"
     >
-      {pending ? 'Menyimpan...' : 'Simpan Sponsor'}
+      {pending ? 'Saving...' : 'Save'}
     </button>
   );
 }
@@ -62,7 +62,7 @@ export default function CreateSponsorForm() {
           htmlFor="url_sponsor"
           className="font-medium text-gray-700"
         >
-          URL Sponsor <span className="text-gray-500">(Opsional)</span>
+          URL <span className="text-gray-500">(Optional)</span>
         </label>
         <input
           type="url"
@@ -79,7 +79,7 @@ export default function CreateSponsorForm() {
           htmlFor="posisi"
           className="font-medium text-gray-700"
         >
-          Posisi <span className="text-gray-500">(Opsional)</span>
+          Position <span className="text-gray-500">(Optional)</span>
         </label>
         <input
           type="text"
@@ -96,7 +96,7 @@ export default function CreateSponsorForm() {
           htmlFor="deskripsi"
           className="font-medium text-gray-700"
         >
-          Deskripsi Singkat <span className="text-gray-500">(Opsional)</span>
+          Description <span className="text-gray-500">(Optional)</span>
         </label>
         <textarea
           name="deskripsi"

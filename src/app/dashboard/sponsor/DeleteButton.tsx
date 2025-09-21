@@ -7,7 +7,7 @@ export default function DeleteButton({ sponsorId, imageUrl }: { sponsorId: numbe
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {
-    if (window.confirm('Apakah Anda yakin ingin menghapus sponsor ini?')) {
+    if (window.confirm('Are you sure to delete?')) {
       startTransition(async () => {
         const result = await deleteSponsor(sponsorId, imageUrl);
         alert(result.message);
@@ -17,7 +17,7 @@ export default function DeleteButton({ sponsorId, imageUrl }: { sponsorId: numbe
 
   return (
     <button onClick={handleDelete} disabled={isPending} className="text-red-600 hover:text-red-900 ...">
-      {isPending ? 'Menghapus...' : 'Hapus'}
+      {isPending ? 'Deleting...' : 'Delete'}
     </button>
   );
 }

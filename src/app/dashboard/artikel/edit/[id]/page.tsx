@@ -5,7 +5,14 @@ import { updateArticle } from '../../actions'; // Import action update
 
 export default async function EditArtikelPage({ params }: { params: { id: string } }) {
   const supabase = createClient();
-  
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    redirect('/login');
+  }
+
   const { data: article, error } = await supabase
     .from('artikel')
     .select('*')
@@ -18,7 +25,7 @@ export default async function EditArtikelPage({ params }: { params: { id: string
 
   return (
     <div className="p-4 md:p-8">
-      <h1 className="text-3xl font-bold mb-8">Edit Artikel</h1>
+      <h1 className="text-3xl font-bold mb-8">Edit Article</h1>
       <div className="bg-white p-6 rounded-lg shadow-md">
         {/* Kirim action dan data artikel ke form */}
         <ArticleForm action={updateArticle} article={article} />

@@ -11,9 +11,9 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-70"
+      className="w-full rounded-md bg-blue-500 px-4 py-2 text-white font-bold hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-70"
     >
-      {pending ? 'Menyimpan...' : 'Simpan Iklan'}
+      {pending ? 'Saving...' : 'Save'}
     </button>
   );
 }
@@ -44,7 +44,7 @@ export default function CreateIklanForm() {
           htmlFor="gambar_iklan"
           className="font-medium text-gray-700"
         >
-          Gambar Iklan <span className="text-red-500">*</span>
+          Ad Image <span className="text-red-500">*</span>
         </label>
         <input
           type="file"
@@ -62,7 +62,7 @@ export default function CreateIklanForm() {
           htmlFor="url_tujuan"
           className="font-medium text-gray-700"
         >
-          URL Tujuan <span className="text-gray-500">(Opsional)</span>
+          URL <span className="text-gray-500">(Optional)</span>
         </label>
         <input
           type="url"
@@ -79,7 +79,7 @@ export default function CreateIklanForm() {
           htmlFor="posisi"
           className="font-medium text-gray-700"
         >
-          Posisi <span className="text-gray-500">(Opsional)</span>
+          Position <span className="text-gray-500">(Optional)</span>
         </label>
         <input
           type="text"
@@ -96,7 +96,7 @@ export default function CreateIklanForm() {
           htmlFor="deskripsi"
           className="font-medium text-gray-700"
         >
-          Deskripsi Singkat <span className="text-gray-500">(Opsional)</span>
+          Description <span className="text-gray-500">(Optional)</span>
         </label>
         <textarea
           name="deskripsi"
